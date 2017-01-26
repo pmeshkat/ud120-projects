@@ -18,11 +18,12 @@ from email_preprocess import preprocess
 ### and testing datasets, respectively
 ### labels_train and labels_test are the corresponding item labels
 features_train, features_test, labels_train, labels_test = preprocess()
-features_train = features_train[:len(features_train)/100] 
-labels_train = labels_train[:len(labels_train)/100] 
+# features_train = features_train[:len(features_train)/100] 
+# labels_train = labels_train[:len(labels_train)/100] 
 from sklearn.svm import SVC
 # clf = SVC(kernel="linear")
-for C_val in [10,100,1000,10000]:
+for C_val in [10000]:
+# for C_val in [10,100,1000,10000]:
 	clf = SVC(kernel="rbf", C=C_val)
 
 	clf.fit(features_train,labels_train)
@@ -32,11 +33,16 @@ for C_val in [10,100,1000,10000]:
 	print  'C is:', C_val, 'Accuracy is: ', accuracy_score(labels_predict,labels_test)
 
 # clf = SVC(kernel="rbf",C=10000)
-
-
 #########################################################
 ### your code goes here ###
+# for index in [10,26,50]:
+# 	print index, clf.predict(features_test[index])
+
+print 'Number of 0', labels_predict.tolist().count(0)
+print 'Number of 1', labels_predict.tolist().count(1)
 
 #########################################################
+
+
 
 
